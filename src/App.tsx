@@ -16,6 +16,7 @@ let tasks2 : Array<ArrayType> = [
     {id : 3 , title : "Fortune", isDone : false }
 ]
 
+
     return (
         <div className="App">
             <Todolist title = "What to learn" tasks = {tasks1} />
