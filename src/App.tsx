@@ -12,9 +12,6 @@ let tasks1 : Array<ArrayType> = [
     {id : 5 , title : "Python", isDone : false },
 ]
 
-
-
-
 let tasks2 : Array<ArrayType> = [
     {id : 1 , title : "Terminator", isDone : true },
     {id : 2 , title : "XXX", isDone : false },
