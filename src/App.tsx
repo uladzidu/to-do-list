@@ -13,6 +13,8 @@ let tasks1 : Array<ArrayType> = [
 ]
 
 
+
+
 let tasks2 : Array<ArrayType> = [
     {id : 1 , title : "Terminator", isDone : true },
     {id : 2 , title : "XXX", isDone : false },
