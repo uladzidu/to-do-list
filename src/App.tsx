@@ -7,7 +7,7 @@ function App() {
 let tasks1 : Array<ArrayType> = [
     {id : 1 , title : "HTML", isDone : true },
     {id : 2 , title : "JS", isDone : true },
-    {id : 3 , title : "React", isDone : false }
+    {title : "React", isDone : false }
 ]
 
 let tasks2 : Array<ArrayType> = [
