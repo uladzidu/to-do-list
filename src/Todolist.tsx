@@ -26,9 +26,11 @@ export function Todolist( props : PropsType ) { // использую title и t
             </div>
             <ul>
                 {
-                    props.tasks.map( (t) => {
-                        return <li><input type="checkbox" checked={t.isDone} /> <span>{t.title}</span></li>
-                    } )
+                    props.tasks.map( t => <li><input type="checkbox" checked={t.isDone} /> 
+                    <span>{t.title}</span>
+                    <button onClick = { () => {alert (t.id)} }  >x</button>
+                    </li>
+                     )
                 }
             </ul>
             <div>

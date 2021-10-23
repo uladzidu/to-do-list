@@ -12,17 +12,12 @@ let tasks1 : Array<ArrayType> = [
     {id : 5 , title : "Python", isDone : false },
 ]
 
-let tasks2 : Array<ArrayType> = [
-    {id : 1 , title : "Terminator", isDone : true },
-    {id : 2 , title : "XXX", isDone : false },
-    {id : 3 , title : "Fortune", isDone : false }
-]
+
 
 
     return (
         <div className="App">
-            <Todolist title = "What to learn" tasks = {tasks1} />
-            <Todolist title = "Movies" tasks = {tasks2} /> 
+            <Todolist title = "What to learn" tasks = {tasks1} /> 
         </div>
     );
 }
