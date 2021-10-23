@@ -3,20 +3,21 @@ import React from 'react';
 
 
 export type ArrayType = {
-    id : number
-    title : string
-    isDone : boolean
+    id: number
+    title: string
+    isDone: boolean
 }
 
 
 type PropsType = {
-    
-    title : string
-    tasks : Array<ArrayType>
+
+    title: string
+    tasks: Array<ArrayType>
+    removeTask : Function
 }
 
 
-export function Todolist( props : PropsType ) { // использую title и tasks. То что использовано возле самой компоненты
+export function Todolist(props: PropsType) { // использую title и tasks. То что использовано возле самой компоненты
     return (
         <div>
             <h3> {props.title} </h3>
@@ -26,11 +27,11 @@ export function Todolist( props : PropsType ) { // использую title и t
             </div>
             <ul>
                 {
-                    props.tasks.map( t => <li><input type="checkbox" checked={t.isDone} /> 
-                    <span>{t.title}</span>
-                    <button onClick = { () => {alert (t.id)} }  >x</button>
-                    </li>
-                     )
+                    props.tasks.map (t => <li><input type="checkbox" checked={t.isDone} />
+                            <span>{t.title}</span>
+                            <button onClick={() => { props.removeTask(t.id) }} >x</button>
+                        </li>
+                    )
                 }
             </ul>
             <div>
