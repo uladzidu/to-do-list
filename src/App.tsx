@@ -18,7 +18,8 @@ function App() {
         { id: 4, title: "Redux", isDone: false },
         { id: 5, title: "Python", isDone: false },
     ])
-
+    //тестовый коммит
+    
     let [filter, setFilter] = useState<filterValuesType>("all");
 
 
