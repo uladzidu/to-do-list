@@ -1,6 +1,4 @@
-import { type } from 'os';
 import React from 'react';
-import { filterValuesType } from './App';
 
 export type ArrayType = {
     id: number
@@ -8,17 +6,14 @@ export type ArrayType = {
     isDone: boolean
 }
 
-
 type PropsType = {
 
     title: string
     tasks: Array<ArrayType>
     removeTask : (id: number) => void
-    changeFilter : (value : filterValuesType) => void
 }
 
-
-export function Todolist(props: PropsType) { // использую title и tasks. То что использовано возле самой компоненты
+export function Todolist(props: PropsType) {
     return (
         <div>
             <h3> {props.title} </h3>
@@ -36,9 +31,9 @@ export function Todolist(props: PropsType) { // использую title и task
                 }
             </ul>
             <div>
-                <button onClick = { ()=> props.changeFilter("all") }>All</button>
-                <button onClick = { ()=> props.changeFilter("active")  } >Active</button>
-                <button onClick = { ()=> props.changeFilter("completed")  } >Completed</button>
+                <button>All</button>
+                <button>Active</button>
+                <button>Completed</button>
             </div>
         </div>
     );
