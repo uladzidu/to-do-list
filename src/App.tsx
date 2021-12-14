@@ -8,7 +8,8 @@ import {v1} from 'uuid';
 export type FilterValuesType = 'all' | 'completed' | 'active'
 
 
-function App() {v1()
+function App() {
+    v1()
     let [tasks, setTasks] = useState<Array<ArrayType>>([
         {id: v1(), title: 'HTML', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
@@ -27,12 +28,11 @@ function App() {v1()
         setTasks(filteredTasks)
     }
 
-   function addTask(title : string) {
+    function addTask(title : string) {
         let newAddedTask = {id: v1(), title: title, isDone: false}
-        let newArrayTasks = [newAddedTask,...tasks]
-        setTasks(newArrayTasks)
+        let addedTasks = [newAddedTask,...tasks]
+        setTasks(addedTasks)
     }
-
 
     let tasksForToDoList = tasks;
     if (filter === 'completed') {
@@ -49,7 +49,7 @@ function App() {v1()
                 tasks={tasksForToDoList}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
-                addTask={addTask}
+                addTask = {addTask}
             />
         </div>
     );
