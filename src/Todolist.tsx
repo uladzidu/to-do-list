@@ -31,6 +31,15 @@ export function Todolist(props: PropsType) {
         props.addTask(newTaskTitle)
         setNewTaskTitle('')
     }
+    const filterAll = () => {
+        props.changeFilter('all')
+    }
+    const filterActive = () => {
+        props.changeFilter('active')
+    }
+    const filterCompleted = () => {
+        props.changeFilter('completed')
+    }
 
 
     return (
@@ -44,30 +53,25 @@ export function Todolist(props: PropsType) {
             </div>
             <ul>
                 {
-                    props.tasks.map(t => <li key={t.id}>
+                    props.tasks.map(t => {
+
+                        const onRemoveHandler = () => {
+                            props.removeTask(t.id)
+                        }
+
+                        return <li key={t.id}>
                             <input type="checkbox" checked={t.isDone}/>
                             <span>{t.title}</span>
-                            <button onClick={() => {
-                                props.removeTask(t.id)
-                            }}>x
+                            <button onClick={onRemoveHandler}>x
                             </button>
                         </li>
-                    )
+                    })
                 }
             </ul>
             <div>
-                <button onClick={(e) => {
-                    props.changeFilter('all')
-                }}>All
-                </button>
-                <button onClick={(e) => {
-                    props.changeFilter('active')
-                }}>Active
-                </button>
-                <button onClick={(e) => {
-                    props.changeFilter('completed')
-                }}>Completed
-                </button>
+                <button onClick={filterAll}>All</button>
+                <button onClick={filterActive}>Active</button>
+                <button onClick={filterCompleted}>Completed</button>
             </div>
         </div>
     );
