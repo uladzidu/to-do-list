@@ -38,27 +38,26 @@ export function App() {
     ])
 
 
-    function deleteTask(id: string) {
-        // let filteredTasks = tasks(t => t.id !== id)
-        // setTasks(filteredTasks)
+    function deleteTask(todolistId: string, id: string) {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== id)})
     }
 
-    function addTask(title: string) {
-        // let newTask = {id: v1(), title: title, isDone: false}
-        // let newTasks = [newTask, ...tasks]
-        // setTasks(newTasks)
+    function deleteTodolist (todolistId: string) {
+       //setTasks()
+        alert(todolistId)
+
     }
 
-    function changeStatus(taskId: string, isDone: boolean) {
-        // let task = tasks.find(t => t.id === taskId);
-        // if (task) {
-        //     task.isDone = isDone;
-        // }
-        // setTasks([...tasks])
+    function addTask(todolistId: string, title: string) {
+        let newTask = {id: v1(), title: title, isDone: false}
+        setTasks({...tasks, [todolistId] : [newTask, ...tasks[todolistId]] })
+    }
+
+    function changeStatus(todolistId: string, taskId: string, isDone: boolean) {
+        setTasks( {...tasks, [todolistId] : tasks[todolistId].map(m => m.id === taskId ? {...m,isDone} : m)})
     }
 
     function changeFilter(todolistId: string, value: FilterValuesType) {
-        // setFilter(value)
         setTodolist(todolists.map(m => m.id === todolistId ? {...m, filter: value} : m))
     }
 
@@ -66,7 +65,7 @@ export function App() {
     return (
         <div className={'App'}>
             {todolists.map((tl, index) => {
-                let tasksForFilter = tasks[tl.filter]
+                let tasksForFilter = tasks[tl.id]
                 if (tl.filter === "completed") {
                     tasksForFilter = tasks[tl.id].filter(t => t.isDone)
                 }
@@ -85,6 +84,7 @@ export function App() {
                         addTask={addTask}
                         changeStatus={changeStatus}
                         filter={tl.filter}
+                        deleteTodolist = {deleteTodolist}
                     />
                 )
             })}
