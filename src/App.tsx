@@ -39,7 +39,8 @@ export function App() {
      let [filter, setFilter] = useState<FilterValuesType>('all')
 
     function deleteTask(todolistId : string, id: string) {
-        setTasks({...tasks,[todolistId]: tasks[todolistId].filter(filter => filter.id != id)} )
+        //setTasks({...tasks,[todolistId]: tasks[todolistId].filter(filter => filter.id != id)} )
+
     }
 
     function addTask(todolistId : string, title: string) {
