@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
+import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 export type FilterType = 'all' | 'active' | 'completed'
@@ -24,9 +24,19 @@ export function App() {
     }
 
     function addTask (newTaskTitle : string) {
-        let newTask = {id : v1(), title: newTaskTitle, isDone: false}
+        const newTask = {id : v1(), title: newTaskTitle, isDone: false}
         setTasks([newTask, ...tasks])
 
+    }
+
+    function changeCheckBoxStatus(taskId : string, isDone : boolean): void {
+        const task = tasks.find( (elem: TaskType) =>
+            elem.id === taskId
+         )
+        if (task) {
+            task.isDone = isDone
+        }
+        setTasks([...tasks]);
     }
 
     let filteredTasks = tasks
@@ -45,7 +55,9 @@ export function App() {
                       tasks = {filteredTasks}
                       removeTask = {removeTask}
                       changeFilter = {changeFilter}
+                      filter = {filter}
                       addTask = {addTask}
+                      changeCheckBoxStatus = {changeCheckBoxStatus}
             />
 
         </div>
