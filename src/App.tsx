@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {Input} from "./components/Input";
+
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TodolistsPropsType = {
@@ -10,13 +12,12 @@ export type TodolistsPropsType = {
     filter: FilterType
 }
 
-
 export function App() {
 
     let todolistId1 = v1()
     let todolistId2 = v1()
 
-    const [todolists, SetTodolists] = useState<Array<TodolistsPropsType>>([
+    const [todolists, setTodolists] = useState<Array<TodolistsPropsType>>([
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ])
@@ -37,17 +38,16 @@ export function App() {
     function removeTask(todolistId: string, taskId: string) {
 
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(elem => elem.id !== taskId)})
-
     }
 
     function removeTodolist(todolistId : string) {
 
-        SetTodolists(todolists.filter( elem => elem.id !== todolistId ))
+        setTodolists(todolists.filter( elem => elem.id !== todolistId ))
     }
 
     function changeFilter(todolistId: string, filterValue: FilterType) {
 
-        SetTodolists(todolists.map(elem =>
+        setTodolists(todolists.map(elem =>
 
             elem.id === todolistId ? {...elem, filter: filterValue} : elem))
 
@@ -58,14 +58,6 @@ export function App() {
         const newTask = {id: v1(), title: newTaskTitle, isDone: false}
 
         setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
-    }
-
-    function addTodolist() {
-
-        const newTodolist = {id: v1(), title: 'What to heyyyyy', filter: 'all'}
-
-        SetTodolists([...todolists,{id: v1(), title: 'What to learn', filter: 'all'}])
-
     }
 
     function changeCheckBoxStatus(todolistId: string, taskId: string, isDone: boolean): void {
@@ -79,8 +71,19 @@ export function App() {
         setTasks({...tasks});
     }
 
+    const addTodolist = (newTitle : string) => {
+
+        const newTodolistId = v1()
+        const newTodolist :TodolistsPropsType = {id: newTodolistId, title: newTitle, filter: 'all'}
+
+        setTodolists([newTodolist,...todolists])
+        setTasks({...tasks, [newTodolistId] : [] })
+    }
+
     return (
         <div className={'App'}>
+
+            <Input callback={ addTodolist }  />
 
             {todolists.map((elem) => {
 
@@ -114,4 +117,3 @@ export function App() {
 
     )
 }
-
