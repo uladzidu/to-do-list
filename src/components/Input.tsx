@@ -1,47 +1,34 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 export type InputPropsType = {
-    callback : (newTitle : string) => void
+    callback: (newTaskTitle : string) => void
 }
 
-export function Input (props : InputPropsType) {
+export const Input = (props : InputPropsType) => {
 
-    const [title, setTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
+    const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<null|string>(null)
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      setError(null)
-        if (e.charCode === 13) {
-            inputAddTask()
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError('');
-        setTitle(e.currentTarget.value);
-    }
-
-    const inputAddTask = () => {
-        const newTitle = title.trim()
-        if (newTitle !== '') {
-            props.callback(newTitle)
+    const onChangeHandler = (e : ChangeEvent<HTMLInputElement>) => {setTitle(e.currentTarget.value); setError('')}
+    const addTaskHandler = () => {
+        if (title === '') {
+            setError('Title is required')
         } else {
-            setError('Field is required')
+            props.callback(title) ;
+            setTitle('');
         }
-        setTitle('')
     }
-
 
     return (
         <div>
-            <input value={title}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
-                   className={error ? 'error' : ''}
-            />
-            <button onClick={inputAddTask}>+</button>
-            <div className={'error-message'}>{error}</div>
+            <div>
+                <input value={title} onChange={onChangeHandler}/>
+                <button onClick={addTaskHandler}>+</button>
+            </div>
+            <div className={'Error'}>{error}</div>
         </div>
+
     );
 };
 
+export default Input;
