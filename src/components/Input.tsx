@@ -11,10 +11,10 @@ export const Input = (props : InputPropsType) => {
 
     const onChangeHandler = (e : ChangeEvent<HTMLInputElement>) => {setTitle(e.currentTarget.value); setError('')}
     const addTaskHandler = () => {
-        if (title === '') {
+        if (title.trim() === '') {
             setError('Title is required')
         } else {
-            props.callback(title) ;
+            props.callback(title.trim());
             setTitle('');
         }
     }

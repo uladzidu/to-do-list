@@ -73,7 +73,19 @@ const App = () => {
         const newId = v1()
         const newTodolist : TodolistsType = {id: newId, title: newTitle, filter: 'all'}
         setTodolists([newTodolist,...todolists])
+        setTasks({...tasks, [newId] : [] })
     }
+    const editTaskSpan = (todolistId: string, taskId: string, newTitle: string) => {
+        setTasks({
+            ...tasks,
+            [todolistId]: tasks[todolistId].map(elem =>
+                elem.id === taskId ? {...elem, title: newTitle} : elem)
+        })
+    }
+    const editTodolistSpan = (todolistId : string, newTitle : string) => {
+        setTodolists( todolists.map( elem => elem.id === todolistId ? {...elem, title : newTitle} : elem ))
+    }
+
 
     return (
         <div className={'App'}>
@@ -81,6 +93,7 @@ const App = () => {
             <Input callback={addTodolist}/>
 
             {todolists.map( (elem : TodolistsType) => {
+
                 let resultedTasks = tasks[elem.id]
 
                 if (elem.filter === 'active') {
@@ -91,7 +104,6 @@ const App = () => {
                 }
 
                 return (
-
 
                     <Todolist
                         key={elem.id}
@@ -106,6 +118,8 @@ const App = () => {
                         removeTodolist = {removeTodolist}
                         changeCheckBoxStatus = {changeCheckBoxStatus}
                         addTodolist = {addTodolist}
+                        editTaskSpan = {editTaskSpan}
+                        editTodolistSpan = {editTodolistSpan}
                     />
                 )
             })}
