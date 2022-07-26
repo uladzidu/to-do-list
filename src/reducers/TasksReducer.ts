@@ -1,25 +1,16 @@
-import React from "react";
+import {TasksType} from "../App";
 
-export const TasksReducer = (state : any, action: any  ) => {
-
+export const TasksReducer = (state : TasksType, action : any) : TasksType => {
     switch (action.type) {
-
-        case 'XXX' : {
+        case 'REMOVE-TASK' : {
             return state
         }
-
-        default: return state
-
+        default : return state
     }
 }
 
-type removeTaskType = ReturnType<typeof removeTaskAC>
-
-const removeTaskAC = () => {
-
+export const removeTaskAC = () => {
     return {
-        type : 'REMOVE TASK',
-        payload : {}
-    }
 
+    }
 }
