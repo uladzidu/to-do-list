@@ -15,8 +15,8 @@ export type TaskType = {
     title: string,
     isDone: boolean
 }
-export type TasksType = {
-    [key: string]: Array<{ id: string, title: string, isDone: boolean }>
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
 }
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState<TasksType>({
+    let [tasks, setTasks] = useState<TasksStateType>({
         [todolistId1]: [
             {id: v1(), title: 'Html', isDone: true},
             {id: v1(), title: 'Css', isDone: true},

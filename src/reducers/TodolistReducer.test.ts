@@ -5,7 +5,7 @@ import {
     ChangeTodolistFilterAC,
     EditTodolistSpanAC,
     RemoveTodolistAC,
-    todolistReducer
+    TodolistReducer
 } from "./TodolistReducer";
 
 test('correct todolist should be remove' , () => {
@@ -21,10 +21,10 @@ test('correct todolist should be remove' , () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 
-    const rsTodolist = todolistReducer(defaultState, RemoveTodolistAC (todolistId2)  )
-    const rsAddTodolist = todolistReducer(defaultState, AddTodolistAC(newId , newTodolistTitle) )
-    const rsEditTodolistTitle = todolistReducer(defaultState, EditTodolistSpanAC( newId , newTodolistTitle ) )
-    const rsChangedFilter = todolistReducer(defaultState, ChangeTodolistFilterAC(todolistId1, 'completed') )
+    const rsTodolist = TodolistReducer(defaultState, RemoveTodolistAC (todolistId2)  )
+    const rsAddTodolist = TodolistReducer(defaultState, AddTodolistAC(newId , newTodolistTitle) )
+    const rsEditTodolistTitle = TodolistReducer(defaultState, EditTodolistSpanAC( newId , newTodolistTitle ) )
+    const rsChangedFilter = TodolistReducer(defaultState, ChangeTodolistFilterAC(todolistId1, 'completed') )
 
     // remove-todolist tests
     expect(rsTodolist.length).toBe(1)
@@ -43,3 +43,4 @@ test('correct todolist should be remove' , () => {
 
 
 } )
+
