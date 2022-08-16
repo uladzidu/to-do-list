@@ -1,12 +1,12 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, memo, useState} from 'react';
 
 export type EditableInputPropsType = {
     title : string
     callback : (newTitle : string) => void
 }
 
-export const EditableInput = (props : EditableInputPropsType) => {
-
+const EditableInput = memo((props : EditableInputPropsType) => {
+    console.log('EditableInput')
     const [title, setTitle] = useState(props.title)
     const [edit, setEdit] = useState(false)
 
@@ -32,4 +32,6 @@ export const EditableInput = (props : EditableInputPropsType) => {
 
             : <span onDoubleClick={onDoubleClickHandler}>{title}</span>
     );
-};
+})
+
+export default EditableInput

@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import {v1} from "uuid";
 import {Todolist} from "./Todolist";
 import './App.css'
-import Input from "./components/Input";
+import AddItemForm from "./components/AddItemForm";
+
+
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TodolistsType = {
@@ -93,7 +95,7 @@ const App = () => {
     return (
         <div className={'App'}>
 
-            <Input callback={addTodolist}/>
+            <AddItemForm callback={addTodolist}/>
 
             {todolists.map( (elem : TodolistsType) => {
 
@@ -111,7 +113,6 @@ const App = () => {
                     <Todolist
                         key={elem.id}
                         todolistId={elem.id}
-                        todolists={todolists}
                         title={elem.title}
                         tasks={resultedTasks}
                         removeTask = {removeTask}
@@ -121,8 +122,8 @@ const App = () => {
                         removeTodolist = {removeTodolist}
                         changeCheckBoxStatus = {changeCheckBoxStatus}
                         addTodolist = {addTodolist}
-                        editTaskSpan = {editTaskSpan}
-                        editTodolistSpan = {editTodolistSpan}
+                        editTaskTitle= {editTaskSpan}
+                        editTodolistTitle= {editTodolistSpan}
                     />
                 )
             })}

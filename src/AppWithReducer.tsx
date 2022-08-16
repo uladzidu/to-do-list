@@ -2,7 +2,7 @@ import React, {useReducer, useState} from 'react';
 import {v1} from "uuid";
 import {Todolist} from "./Todolist";
 import './App.css'
-import Input from "./components/Input";
+
 import {
     addTodolistAC,
     changeTodolistFilterAC,
@@ -11,6 +11,7 @@ import {
     TodolistReducer
 } from "./reducers/TodolistReducer";
 import {addTaskAC, changeCheckBoxStatusAC, editTaskSpanAC, removeTaskAC, TasksReducer} from "./reducers/TasksReducer";
+import AddItemForm from "./components/AddItemForm";
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TodolistsType = {
@@ -96,7 +97,7 @@ export const AppWithReducer = () => {
     return (
         <div className={'App'}>
 
-            <Input callback={addTodolist}/>
+            <AddItemForm callback={addTodolist}/>
 
             {todolists.map( (elem : TodolistsType) => {
 
@@ -114,7 +115,6 @@ export const AppWithReducer = () => {
                     <Todolist
                         key={elem.id}
                         todolistId={elem.id}
-                        todolists={todolists}
                         title={elem.title}
                         tasks={resultedTasks}
                         removeTask = {removeTask}
@@ -124,8 +124,8 @@ export const AppWithReducer = () => {
                         removeTodolist = {removeTodolist}
                         changeCheckBoxStatus = {changeCheckBoxStatus}
                         addTodolist = {addTodolist}
-                        editTaskSpan = {editTaskSpan}
-                        editTodolistSpan = {editTodolistSpan}
+                        editTaskTitle= {editTaskSpan}
+                        editTodolistTitle= {editTodolistSpan}
                     />
                 )
             })}
