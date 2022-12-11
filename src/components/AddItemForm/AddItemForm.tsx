@@ -9,7 +9,6 @@ type AddItemFormPropsType = {
 }
 
 export const AddItemForm = React.memo(function ({addItem, disabled = false}: AddItemFormPropsType) {
-    console.log('AddItemForm called')
 
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
@@ -42,7 +41,7 @@ export const AddItemForm = React.memo(function ({addItem, disabled = false}: Add
                    error={!!error}
                    value={title}
                    onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
+                   onKeyDown={onKeyPressHandler}
                    label="Title"
                    helperText={error}
         />

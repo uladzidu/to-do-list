@@ -17,18 +17,13 @@ import Paper from '@mui/material/Paper';
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
 import {Todolist} from './Todolist/Todolist'
 import {Navigate} from "react-router-dom";
+import {initializeAppTC} from "../../app/app-reducer";
 
-type PropsType = {
-    demo?: boolean
-}
-
-export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
+export const TodolistsList: React.FC = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
-
-    console.log('tasks : ',tasks)
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
         const thunk = removeTaskTC(id, todolistId)
@@ -75,6 +70,10 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(fetchTodolistsTC())
     }, [])
 
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
+
     if (!isLoggedIn) return <Navigate to={'/login'}/>
 
     return <>
@@ -98,7 +97,6 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
                                 removeTodolist={removeTodolist}
                                 changeTaskTitle={changeTaskTitle}
                                 changeTodolistTitle={changeTodolistTitle}
-                                demo={demo}
                             />
                         </Paper>
                     </Grid>

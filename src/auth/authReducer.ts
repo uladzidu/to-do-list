@@ -1,11 +1,11 @@
 import {Dispatch} from 'redux'
-import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../app/app-reducer";
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setEmailAC} from "../app/app-reducer";
 import {authApi} from "../api/todolists-api";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
 }
 type InitialStateType = typeof initialState
 
@@ -28,6 +28,7 @@ export const loginTC = (data: any) => async (dispatch: Dispatch<AuthActionsType>
     try {
         dispatch(setAppStatusAC('loading'))
         const response = await authApi.login(data)
+        console.log(response)
         if (response.data.resultCode === 0) {
             dispatch(setIsLoggedInAC(true))
         } else {
@@ -47,6 +48,7 @@ export const logoutTC = () => async (dispatch: Dispatch<AuthActionsType>) => {
     const response = await authApi.logout()
     try {
         if (response.data.resultCode === 0) {
+            dispatch(setEmailAC(null))
             dispatch(setIsLoggedInAC(false))
             dispatch(setAppStatusAC('succeeded'))
         } else {
@@ -60,4 +62,9 @@ export const logoutTC = () => async (dispatch: Dispatch<AuthActionsType>) => {
 
 
 // types
-export type AuthActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType
+export type AuthActionsType =
+    ReturnType<typeof setIsLoggedInAC>
+    | SetAppStatusActionType
+    | SetAppErrorActionType
+    | ReturnType<typeof setEmailAC>
+

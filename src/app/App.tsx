@@ -24,17 +24,21 @@ function App() {
     const status = useAppSelector((state) => state.app.status)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
+    const userEmail = useAppSelector(state => state.app.email)
+    console.log('userEmail : ' ,userEmail)
+    console.log('status : ', status)
 
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [dispatch])
 
-    if (!isInitialized) {
+    if (!isInitialized ) {
         return <div
             style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
             <CircularProgress/>
         </div>
     }
+
     const handleLogout = () => {
         dispatch(logoutTC())
     }
@@ -42,15 +46,15 @@ function App() {
     return (
         <div className="App">
             <ErrorSnackbar/>
-            <AppBar position="static">
-                <div><Toolbar>
-                    <Typography variant="h6">
-                        Todolist
+            {userEmail && <AppBar style={{display: 'flex',alignItems : 'flex-start'}} position="static">
+                <Toolbar>
+                    <Typography style={{marginRight : '10px', color : 'gold'}} variant="h6">
+                        {userEmail}
                     </Typography>
                     {isLoggedIn && <Button onClick={handleLogout} color="inherit">Log out</Button>}
-                </Toolbar></div>
-                <div>{status === 'loading' && <LinearProgress/>}</div>
-            </AppBar>
+                </Toolbar>
+                {status === 'loading' && <LinearProgress/>}
+            </AppBar>}
             <Container fixed>
                 <Routes>
                     <Route path={'/'} element={<TodolistsList/>}/>
