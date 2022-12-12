@@ -25,8 +25,6 @@ function App() {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
     const userEmail = useAppSelector(state => state.app.email)
-    console.log('userEmail : ' ,userEmail)
-    console.log('status : ', status)
 
     useEffect(() => {
         dispatch(initializeAppTC())
