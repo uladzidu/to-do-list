@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 import {Page404} from "../features/Page404/Page404";
 import {CircularProgress} from "@mui/material";
@@ -55,10 +55,10 @@ function App() {
             </AppBar>}
             <Container fixed>
                 <Routes>
-                    <Route path={'/'} element={<TodolistsList/>}/>
+                    <Route path={'*'} element={<TodolistsList/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/404'} element={<Page404/>}/>
-                    <Route path={'*'} element={<Navigate to={'/404'}/>}/>
+                    {/*<Route path={'*'} element={<Navigate to={'/404'}/>}/>*/}
                 </Routes>
             </Container>
         </div>
